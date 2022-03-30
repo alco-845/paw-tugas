@@ -1,3 +1,11 @@
+<?php 
+
+include_once("koneksi.php");
+
+$result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,7 +77,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Menu</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Add</a>                        
+                        <a href="tambahMenu.php" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Add</a>                        
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -82,55 +90,22 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                            <th>Role</th>
+                                            <th>Kategori</th>
+                                            <th>Menu</th>
+                                            <th>Harga</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                        $no = 1;
+                                        while ($menu = mysqli_fetch_array($result)) { ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>Deshmukh</td>
-                                            <td>Prohaska</td>
-                                            <td>@Genelia</td>
-                                            <td>admin</td>
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $menu['kategori']; ?></td>
+                                            <td><?= $menu['menu']; ?></td>
+                                            <td><?= $menu['harga']; ?></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Deshmukh</td>
-                                            <td>Gaylord</td>
-                                            <td>@Ritesh</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Sanghani</td>
-                                            <td>Gusikowski</td>
-                                            <td>@Govinda</td>
-                                            <td>developer</td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Roshan</td>
-                                            <td>Rogahn</td>
-                                            <td>@Hritik</td>
-                                            <td>supporter</td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Joshi</td>
-                                            <td>Hickle</td>
-                                            <td>@Maruti</td>
-                                            <td>member</td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Nigam</td>
-                                            <td>Eichmann</td>
-                                            <td>@Sonu</td>
-                                            <td>supporter</td>
-                                        </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
