@@ -112,7 +112,7 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
                                             <td><?= $menu['kategori']; ?></td>
                                             <td><?= $menu['menu']; ?></td>
                                             <td><?= $menu['harga']; ?></td>
-                                            <td><a href="editMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-edit text-warning"></i></a></td>
+                                            <td><a href="ubahMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-edit text-warning"></i></a></td>
                                             <td><a href="hapusMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-trash text-danger"></i></a></td>
                                         </tr>
                                         <?php } ?>

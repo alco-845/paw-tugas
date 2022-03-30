@@ -2,24 +2,34 @@
 
 include_once("koneksi.php");
 
+$id = $_GET["id"];
+$result = mysqli_query($koneksi, "SELECT * FROM tblmenu WHERE idmenu = $id");
+while ($data = mysqli_fetch_array($result)) 
+{
+	$kategori = $data['kategori'];
+	$menu = $data['menu'];
+	$harga = $data['harga'];
+}
+
+
 if(isset($_POST['submit'])) {
     $kategori = $_POST['kategori'];
     $menu = $_POST['menu'];
     $harga = $_POST['harga'];
     
-    $result = mysqli_query($koneksi, "INSERT INTO tblmenu(kategori, menu, harga) VALUES('$kategori','$menu','$harga')");
+    $result = mysqli_query($koneksi, "UPDATE tblmenu SET kategori = '$kategori', menu = '$menu', harga = '$harga' WHERE idmenu = '$id'");
     
     if ($result) {
         echo "
         <script>
-            alert('Data berhasil ditambah');
+            alert('Data berhasil diubah');
             document.location.href = 'index.php';
         </script>
         ";
     } else {
         echo "
         <script>
-            alert('Data gagal ditambah')
+            alert('Data gagal diubah')
             document.location.href = 'index.php';
         </script>
         ";
@@ -94,7 +104,7 @@ if(isset($_POST['submit'])) {
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Tambah Menu</h4> </div>
+                        <h4 class="page-title">Ubah Menu</h4> </div>
                     <!-- /.col-lg-12 -->
                 </div>
                 <!-- /row -->
@@ -105,20 +115,20 @@ if(isset($_POST['submit'])) {
                                 <div class="form-group">
                                     <label for="kategori">Kategori</label>
                                     <select class="form-control" id="kategori" name="kategori">
-                                        <option selected disabled>Pilih kategori</option>
-                                        <option value="Makanan">Makanan</option>
-                                        <option value="Minuman">Minuman</option>
+                                        <option disabled>Pilih kategori</option>
+                                        <option <?php if($kategori == "Makanan") echo 'selected'; ?> value="Makanan">Makanan</option>
+                                        <option <?php if($kategori == "Minuman") echo 'selected'; ?> value="Minuman">Minuman</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="menu">Nama Menu</label>
-                                    <input type="text" class="form-control" name="menu" id="menu" required>
+                                    <input type="text" class="form-control" name="menu" id="menu" value="<?= $menu ?>" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="harga">Harga</label>
-                                    <input type="number" class="form-control" name="harga" id="harga" min="0" required>
+                                    <input type="number" class="form-control" name="harga" id="harga" value="<?= $harga ?>" min="0" required>
                                 </div>
 
                                 <div class="form-group">
