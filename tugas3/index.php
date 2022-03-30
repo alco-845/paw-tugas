@@ -4,6 +4,14 @@ include_once("koneksi.php");
 
 $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
 
+if(isset($_GET['cari'])){
+    $cari = $_GET['cari'];
+    $result = mysqli_query($koneksi, "SELECT * FROM tblmenu WHERE menu LIKE '%".$cari."%'");				
+}else{
+    $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +70,10 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
+                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10" action="" method="get">
+                            <input type="text" name="cari" placeholder="Search..." class="form-control">
+                            <a><i class="fa fa-search"></i></a> 
+                        </form>
                     </li>
                     <li>
                         <a></a>
