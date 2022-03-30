@@ -27,6 +27,8 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
     <link href="css/style.css" rel="stylesheet">
     <!-- color CSS -->
     <link href="css/colors/default.css" id="theme" rel="stylesheet">
+    <!-- Fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -53,6 +55,11 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
         <!-- ============================================================== -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header">                
+                <ul class="nav navbar-top-links navbar-left pull-left">
+                    <li>
+                        <p style="margin-top: 8%; margin-left: 25px" class="text-white h3">Admin Restoran</p>
+                    </li>
+                </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
                         <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
@@ -77,7 +84,7 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Menu</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="tambahMenu.php" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Add</a>                        
+                        <a href="tambahMenu.php" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"><i class="fas fa-plus fa-sm"></i>&nbsp; Tambah Data</a>                        
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -86,13 +93,14 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
                     <div class="col-sm-12">
                         <div class="white-box">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="text-align: center;">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Kategori</th>
-                                            <th>Menu</th>
-                                            <th>Harga</th>
+                                            <th style="text-align: center;">#</th>
+                                            <th style="text-align: center;">Kategori</th>
+                                            <th style="text-align: center;">Nama Menu</th>
+                                            <th style="text-align: center;">Harga</th>
+                                            <th style="text-align: center;" colspan="2">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -104,6 +112,8 @@ $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
                                             <td><?= $menu['kategori']; ?></td>
                                             <td><?= $menu['menu']; ?></td>
                                             <td><?= $menu['harga']; ?></td>
+                                            <td><a href="editMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-edit text-warning"></i></a></td>
+                                            <td><a href="hapusMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-trash text-danger"></i></a></td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>
