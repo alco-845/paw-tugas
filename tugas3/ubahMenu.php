@@ -3,7 +3,7 @@
 include_once("koneksi.php");
 
 $id = $_GET["id"];
-$result = mysqli_query($koneksi, "SELECT * FROM tblmenu WHERE idmenu = $id");
+$result = mysqli_query($koneksi, "SELECT * FROM tbl_146 WHERE idmenu = $id");
 while ($data = mysqli_fetch_array($result)) 
 {
 	$kategori = $data['kategori'];
@@ -17,7 +17,7 @@ if(isset($_POST['submit'])) {
     $menu = $_POST['menu'];
     $harga = $_POST['harga'];
     
-    $result = mysqli_query($koneksi, "UPDATE tblmenu SET kategori = '$kategori', menu = '$menu', harga = '$harga' WHERE idmenu = '$id'");
+    $result = mysqli_query($koneksi, "UPDATE tbl_146 SET kategori = '$kategori', menu = '$menu', harga = '$harga' WHERE idmenu = '$id'");
     
     if ($result) {
         echo "
@@ -88,7 +88,9 @@ if(isset($_POST['submit'])) {
             <div class="navbar-header">                
                 <ul class="nav navbar-top-links navbar-left pull-left">
                     <li>
-                        <p style="margin-top: 8%; margin-left: 25px" class="text-white h3">Admin Restoran</p>
+                    <a href="index.php" style="min-height: 0px; min-width: 0px;">
+                        <p style="margin-top: 8%; margin-left: 10px" class="text-white h3">Admin Restoran</p>
+                    </a>
                     </li>
                 </ul>
             </div>

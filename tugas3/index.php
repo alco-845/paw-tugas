@@ -2,13 +2,13 @@
 
 include_once("koneksi.php");
 
-$result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
+$result = mysqli_query($koneksi, "SELECT * FROM tbl_146 ORDER BY menu ASC");
 
 if(isset($_GET['cari'])){
     $cari = $_GET['cari'];
-    $result = mysqli_query($koneksi, "SELECT * FROM tblmenu WHERE menu LIKE '%".$cari."%'");				
+    $result = mysqli_query($koneksi, "SELECT * FROM tbl_146 WHERE menu LIKE '%".$cari."%'");				
 }else{
-    $result = mysqli_query($koneksi, "SELECT * FROM tblmenu ORDER BY menu ASC");
+    $result = mysqli_query($koneksi, "SELECT * FROM tbl_146 ORDER BY menu ASC");
 }
 
 
@@ -65,7 +65,9 @@ if(isset($_GET['cari'])){
             <div class="navbar-header">                
                 <ul class="nav navbar-top-links navbar-left pull-left">
                     <li>
-                        <p style="margin-top: 8%; margin-left: 25px" class="text-white h3">Admin Restoran</p>
+                        <a href="index.php" style="min-height: 0px; min-width: 0px;">
+                            <p style="margin-top: 8%; margin-left: 10px" class="text-white h3">Admin Restoran</p>
+                        </a>
                     </li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
@@ -115,17 +117,27 @@ if(isset($_GET['cari'])){
                                     </thead>
                                     <tbody>
                                         <?php 
-                                        $no = 1;
-                                        while ($menu = mysqli_fetch_array($result)) { ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $menu['kategori']; ?></td>
-                                            <td><?= $menu['menu']; ?></td>
-                                            <td><?= $menu['harga']; ?></td>
-                                            <td><a href="ubahMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-edit text-warning"></i></a></td>
-                                            <td><a href="hapusMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-trash text-danger"></i></a></td>
-                                        </tr>
-                                        <?php } ?>
+                                        if (mysqli_num_rows($result )== 0) {
+                                            echo '
+                                                <tr>
+                                                    <td colspan="6"><p>Tidak ada data</p></td>
+                                                </tr>
+                                            ';
+                                        } else {                                        
+                                            $no = 1;
+                                            while ($menu = mysqli_fetch_array($result)) { ?>
+                                                <tr>                                            
+                                                    <td><?= $no++; ?></td>
+                                                    <td><?= $menu['kategori']; ?></td>
+                                                    <td><?= $menu['menu']; ?></td>
+                                                    <td><?= $menu['harga']; ?></td>
+                                                    <td><a href="ubahMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-edit text-warning"></i></a></td>
+                                                    <td><a href="hapusMenu.php?id=<?= $menu['idmenu']?>"><i class="fa fa-trash text-danger"></i></a></td>
+                                                </tr>
+                                        <?php 
+                                            }
+                                        } 
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

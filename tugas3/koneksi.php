@@ -3,7 +3,7 @@
 $host = 'localhost';
 $dbUsr = 'root';
 $dbPw = '';
-$dbName = 'tbl_146';
+$dbName = 'db_nicola';
 
 $koneksi = mysqli_connect($host, $dbUsr, $dbPw, $dbName);
 
